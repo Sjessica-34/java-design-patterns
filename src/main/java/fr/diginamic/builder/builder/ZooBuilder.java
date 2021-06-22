@@ -20,12 +20,13 @@ public class ZooBuilder {
     }
 
     public void appendZone(String nom, int capacite) {
-        Zone zone = new Zone(nom,capacite);
+        Zone zone = new Zone(nom, capacite);
         this.zoo.getZone().add(zone);
+        //zoo.getZone().add(newZone(nom,capacite));
     }
 
 
-    public ZooBuilder appendAnimal(String nomZone, Animal animal){
+    public ZooBuilder appendAnimal(String nomZone, Animal animal) {
         List<Zone> zone = zoo.getZone();
         for (Zone zone1 :
                 zone) {
@@ -33,14 +34,15 @@ public class ZooBuilder {
                 if (zone1.getCapacite() > zone1.getAnimalList().size()) {
                     zone1.addAnimal(animal);
                     return this;
-                }
-                else {
+                } else {
                     System.out.println("La zone est remplie");
                 }
             }
         }
         return null;
     }
+
+
 
     public Zoo get() {
         return zoo;
