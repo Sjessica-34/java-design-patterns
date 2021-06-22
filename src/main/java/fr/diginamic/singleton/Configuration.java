@@ -3,46 +3,59 @@ package fr.diginamic.singleton;
 
 import java.util.ResourceBundle;
 
+//<---------------------->
+//Elements de correction
+
+//private static fianl Configuration INSTANCE = new Configuration();
+//private Configuration();{
+    //chargerFichier();
+     //
+
+
 public class Configuration {
 
-    private String url;
+    private String nomBase;
     private String user;
     private String password;
 
     private Configuration() {
+        chargerFichier();
     }
 
-    public Configuration(String url, String user, String password) {
-        this.url = url;
+    public Configuration(String nomBase, String user, String password) {
+        this.nomBase = nomBase;
         this.user = user;
         this.password = password;
     }
 
-    private void bundle() {
+    private void chargerFichier() {
         ResourceBundle configuration = ResourceBundle.getBundle("configuration");
-        url = configuration.getString("db.url");
+        nomBase = configuration.getString("db.nom");
         user = configuration.getString("db.user");
         password = configuration.getString("db.password");
     }
+// Classe chargée au moment où la méthode getInstance est unvoquée, ce qui
+    //garanti la création du singleton au moment où getInstance est invoquée et
+    //non au moment du lancement de l'application
 
-    private static class ConfigurationHolder {
-        private final static Configuration instance = new Configuration();
+        private static class SingletonHolder {
+        private final static Configuration INSTANCE = new Configuration();
     }
 
     public static Configuration getInstance() {
-        return ConfigurationHolder.instance;
+        return SingletonHolder.INSTANCE;
     }
 
     //<----------------------------------->
 
     //getter/setter
 
-    public String getUrl() {
-        return url;
+    public String getNomBase() {
+        return nomBase;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setNomBase(String url) {
+        this.nomBase = nomBase;
     }
 
     public String getUser() {
